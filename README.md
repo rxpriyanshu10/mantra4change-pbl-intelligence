@@ -5,8 +5,12 @@ This application is an internal decision-support system designed to transform mo
 
 **Decision Support Boundary**: The application provides deterministic signals by calculating objective results (KPIs, risks, rankings). Evaluators and users interpret these results to make operational decisions. Rankings and risk statuses are informational signals, not autonomous instructions.
 
+## Live Demo
+- **Deployed Application**: [https://mantra4change-pbl-intelligence.vercel.app/](https://mantra4change-pbl-intelligence.vercel.app/)
+- **GitHub Repository**: [https://github.com/rxpriyanshu10/mantra4change-pbl-intelligence](https://github.com/rxpriyanshu10/mantra4change-pbl-intelligence)
+
 ## Key Workflows
-1. **Program Review**: Users filter by month, district, block, grade, or subject to view deterministic KPI cards, month-over-month trends, district/block performance rankings, and a Monthly Review Summary generated from deterministic program facts (detailing Achievements, Month-over-Month Changes, Gaps & Risks, Priority Geographies, and Discussion Points).
+1. **Program Review**: Users filter by month, district, block, grade, or subject to view deterministic KPI cards, month-over-month comparisons, district/block performance rankings, and a Monthly Review Summary generated from deterministic program facts (detailing Achievements, Month-over-Month Changes, Gaps & Risks, Priority Geographies, and Discussion Points).
 2. **Grant Reporting**: Users select a grant and month to view finance utilization, outcomes, milestones, and evidence. A report narrative is generated using an AI adapter (with a deterministic fallback) bounded strictly by the structured facts.
 
 ## Architecture
@@ -55,15 +59,16 @@ For Grant Reporting, multiple budget line items for the same grant and month are
 
 ## Assumptions
 - School identity is uniquely determined by the synthetic school code.
-- Priority rankings are primarily sorted by the gap to the 75% Participation Rate target, tie-broken by evidence rate, as a heuristic for intervention severity.
+- Priority rankings use deterministic risk severity and participation gap, with evidence rate and name used as additional tie-breakers.
 - Derived metrics pre-existing in the CSV are ignored; the application re-calculates all metrics dynamically based on the current filter scope to guarantee correctness.
 
 ## Limitations
 - Datasets are loaded synchronously into memory for this assessment. Filtering massive datasets in the browser memory will not scale without pagination/SQL.
 - AI Provider currently points to a Mock implementation to prevent requiring local API keys during the review.
-- No deployed URL exists; this is a local application run via the `dev` script.
+- The application is deployed as a demonstration on Vercel. The deployment uses the same deterministic seed-data architecture as the local application and does not require an AI API key.
 
-## How to Run Tests
-The application uses Vitest for deterministic logic and boundary testing.
-- Run `npm test` or `vitest run` to execute the test suite (configured in `package.json`).
-- Tests cover risk boundaries, zero-denominators, missing previous months, MoM differences, filter logic, evidence traceability, and narrative validation.
+## How to Run Verification Commands
+The application includes full verification commands for testing, code quality, and production builds:
+- `npm test`: Runs deterministic unit/boundary tests covering risk boundaries, zero-denominators, missing previous months, MoM differences, filter logic, evidence traceability, and narrative validation.
+- `npm run lint`: Checks code quality.
+- `npm run build`: Verifies the production build.
