@@ -75,13 +75,9 @@
 
 ## 8. SMALL CODE CHANGE
 **Goal:** Prove the application is live, editable, and modular.
-* **Action:** Open `app/layout.tsx`.
-* **Change:** Find the navigation links array:
-  ```typescript
-  { name: "Grant Reporting", href: "/grants" }
-  ```
-* **Edit:** Change `"Grant Reporting"` to `"Donor Reporting"`.
-* **Save & Show:** Save the file and instantly show the hot-reloaded UI updating the top navigation bar. It is a purely presentation-level change that is 100% safe to do live without risking business logic.
+
+Small Code Change:
+During the live review, make a small presentation-level change such as changing a KPI card subtitle/label or adjusting a small spacing/style value. Demonstrate the change, verify the page still works, then revert it.
 
 ---
 
